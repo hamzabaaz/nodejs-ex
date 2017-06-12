@@ -2,9 +2,19 @@ var express = require('express'),
     db      = require('../db/db'),
     router  = express.Router();
 
-router.post('/record_history', function(req, res) {
+function bodyParser(req, res, next) {
+     var data = '';
+     req.on('data', function(chunk){ data += chunk})
+     req.on('end', function(){
+           req.rawBody = data;
+           req.body = JSON.parse(data);
+           next();
+      });
+}
 
-        var time, title, url, body;
+router.post('/record_history', bodyParser, function(req, res) {
+
+       var time, title, url, body;
 
         body  = req.body;
 
