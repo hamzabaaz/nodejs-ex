@@ -58,6 +58,12 @@ var initDb = function(callback) {
   });
 };
 
+// Initilize routes
+fs.readdirSync('./routes').forEach(function(file) {
+  if (file.substr(-3) == '.js') {
+     app.use('/' + file.replace('.js', ''), require('./routes/' + file));
+   }
+});
 
 // Test routes
 app.get('/', function (req, res) {
