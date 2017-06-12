@@ -3,12 +3,14 @@ var express = require('express'),
     fs      = require('fs'),
     app     = express(),
     eps     = require('ejs'),
+    bodyParser = require('body-parser'),
     morgan  = require('morgan');
     
 Object.assign=require('object-assign')
 
 app.engine('html', require('ejs').renderFile);
 app.use(morgan('combined'))
+app.use(bodyParser.json())
 
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
@@ -58,6 +60,14 @@ var initDb = function(callback) {
   });
 };
 
+// Initilize routes
+fs.readdirSync('./routes').forEach(function(file) {
+  if (file.substr(-3) == '.js') {
+     app.use('/' + file.replace('.js', ''), require('./routes/' + file));
+   }
+});
+
+// Test routes
 app.get('/', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
