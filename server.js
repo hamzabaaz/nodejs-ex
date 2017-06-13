@@ -22,9 +22,15 @@ fs.readdirSync('./routes').forEach(function(file) {
 
 // Test routes
 app.get('/', function (req, res) {
+  res.status(200);
   res.render('index.html', { pageCountMessage : null});
 });
 
+// Test routes
+app.get('/pagecount', function (req, res) {
+  res.status(200);
+  res.end();
+});
 
 // error handling
 app.use(function(err, req, res, next){
