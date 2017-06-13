@@ -5,14 +5,20 @@ var express = require('express'),
 
 router.get('/', function(req, res) {
 
-    var history; 
+    var history, criteria;
+
+    criteria = {};
+
+    if(req.query && req.query.key) 
+        crteria.key = req.query.key;
+   
 
     db.connect(function(d, err){
         if(!d) {
           res.status(500);
           res.end('Something bad happened !');
         } else {
-          d.collection('history').find().sort({datetime: -1}).toArray(function(err, result){
+          d.collection('history').find(criteria).sort({datetime: -1}).toArray(function(err, result){
             res.render('history.html', {
               history: result
             })
