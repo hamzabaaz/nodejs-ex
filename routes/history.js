@@ -10,7 +10,7 @@ router.get('/', function(req, res) {
     criteria = {};
 
     if(req.query && req.query.key) 
-        crteria.key = req.query.key;
+        criteria.key = req.query.key;
    
 
     db.connect(function(d, err){
