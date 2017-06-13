@@ -22,7 +22,7 @@ router.post('/', bodyParser, function(req, res) {
 
           delete body.type;
 
-          db.init(function(d, err){
+          db.connect(function(d, err){
               if(d) {
                 d.collection('history').insert(body, function(err, result){
                    if(err) console.log(err);

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en"><head>
+  <meta charset="utf8">
+  <title>History</title>
+
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      font-family: monospace;
+    }
+
+    body {
+      background: #f1f1f1;
+      cursor: default;
+    }
+
+    .container {
+    	background: white;
+    	border-radius: 3px;
+    	border: 1px solid #e4dfdf;
+    	width: 70%;
+    	margin: 40px auto;
+    }
+
+    table {
+    	width: 100%;
+    	padding: 10px;
+    }
+
+    table > tbody > tr {
+    	border-bottom: 1px solid grey;
+    }
+
+    table > tbody > tr > td {
+	    padding: 5px 10px;
+	    border-bottom: 1px solid #c3c2c2;
+    }
+
+  </style>
+
+<body>
+  <div class="container">	
+  	<table>
+  		<tbody>
+  		<% for(var i=0; i < history.length; i++) { %>
+		   <tr>
+		     <td style='width: 10%'><%= history[i].key %></td>
+		     <td style='width: 30%'><%= history[i].datetime %></td>
+		     <td style='width: 30%'><%= history[i].title%></td>
+		     <td style='width: 20%'><a href='<%=history[i].url%>' target='_blank'><%= history[i].url.substring(0, 20) %>...</a></td>
+		     <td style='width: 10%'><%= history[i].os %></td>
+		   </tr>
+		<% } %>
+
+  		</tbody>
+  	</table>
+  </div>
+</body></html>

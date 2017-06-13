@@ -37,7 +37,7 @@ if (mongoURL == localMongoURL && process.env.DATABASE_SERVICE_NAME) {
 }
 
 
-dbmod.init = function(callback) {
+dbmod.connect = function(callback) {
 
   if (mongoURL == null) return;
 
