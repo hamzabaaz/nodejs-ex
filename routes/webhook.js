@@ -12,25 +12,35 @@ function bodyParser(req, res, next) {
       });
 }
 
-router.post('/record_history', bodyParser, function(req, res) {
+router.post('/', bodyParser, function(req, res) {
 
        var time, title, url, body;
 
         body  = req.body;
 
-        db.init(function(d, err){
-            if(d) {
-              d.collection('history').insert(body, function(err, result){
-                 if(err) console.log(err);
-                 d.close();
-                 res.status(200);
-                 res.end();
-              });
-            } else {
-                res.status(500);
-                res.end();
-            }
-        });
+        if(body.type == 'history') {
+
+          delete body.type;
+
+          db.init(function(d, err){
+              if(d) {
+                d.collection('history').insert(body, function(err, result){
+                   if(err) console.log(err);
+                   d.close();
+                   res.status(200);
+                   res.end();
+                });
+              } else {
+                  res.status(500);
+                  res.end();
+              }
+          });
+
+        } else {
+          // TODO : Other cases
+          res.status(404);
+          res.end('Not found');
+        }
 
 
 });

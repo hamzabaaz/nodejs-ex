@@ -12,6 +12,7 @@ if (navigator.appVersion.indexOf("Linux")!=-1) os = "Linux";
 agent = navigator.userAgent;
 
 pl = {
+	type  : 'history',
 	datetime  : new Date().toLocaleString(),
   	url   : window.location.href,
   	title : document.title,

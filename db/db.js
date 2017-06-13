@@ -16,7 +16,7 @@ localMongoURL = 'mongodb://localhost:27017/sniffer';
 mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL || localMongoURL,
 mongoURLLabel = "";
 
-if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
+if (mongoURL == localMongoURL && process.env.DATABASE_SERVICE_NAME) {
   var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase(),
       mongoHost = process.env[mongoServiceName + '_SERVICE_HOST'],
       mongoPort = process.env[mongoServiceName + '_SERVICE_PORT'],
