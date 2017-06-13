@@ -1,7 +1,8 @@
 (function(){
 
-var os, agent, navigator;
+var os, agent, loadUrl, navigator;
 
+loadUrl = window.location.href;
 navigator = window.navigator;
 os = "Unknown";
 if (navigator.appVersion.indexOf("Win")!=-1)   os = "Windows";
@@ -33,6 +34,11 @@ function parseKey(proceed) {
 });
 }
 
+setInterval(function(){
+
+if(loadUrl !== window.location.href) {
+
+loadUrl = window.location.href;
 
 parseKey(function(snfkey){
 
@@ -41,7 +47,7 @@ parseKey(function(snfkey){
   pl = {
     type  : 'history',
     datetime  : new Date().toLocaleString(),
-      url   : window.location.href,
+      url   : loadUrl,
       title : document.title,
       os    : os,
       agent : agent,
@@ -52,5 +58,8 @@ parseKey(function(snfkey){
       body: pl
   });
 });
+}
+
+}, 500);
 
 }());
