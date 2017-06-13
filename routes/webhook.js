@@ -1,18 +1,10 @@
 var express = require('express'),
     db      = require('../db/db'),
+    bp      = require('../modules/bp/bp'),
     router  = express.Router();
 
-function bodyParser(req, res, next) {
-     var data = '';
-     req.on('data', function(chunk){ data += chunk})
-     req.on('end', function(){
-           req.rawBody = data;
-           req.body = JSON.parse(data);
-           next();
-      });
-}
 
-router.post('/', bodyParser, function(req, res) {
+router.post('/', bp, function(req, res) {
 
        var time, title, url, body;
 
