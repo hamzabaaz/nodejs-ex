@@ -34,13 +34,8 @@ function parseKey(proceed) {
 });
 }
 
-setInterval(function(){
-
-if(loadUrl !== window.location.href) {
-
-loadUrl = window.location.href;
-
-parseKey(function(snfkey){
+function go() {
+  parseKey(function(snfkey){
 
   var pl;
 
@@ -57,7 +52,17 @@ parseKey(function(snfkey){
   chrome.runtime.sendMessage({
       body: pl
   });
-});
+  });
+}
+
+go();
+
+setInterval(function(){
+
+if(loadUrl !== window.location.href) {
+
+ loadUrl = window.location.href;
+ go();
 }
 
 }, 500);
